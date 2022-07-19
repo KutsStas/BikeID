@@ -56,7 +56,7 @@
     <!-- See https://checkstyle.org/config_sizes.html -->
     <module name="FileLength"/>
     <module name="LineLength">
-        <property name="fileExtensions" value="java"/>
+        <property name="max" value="120"/>
     </module>
 
 
@@ -83,7 +83,6 @@
         <module name="InvalidJavadocPosition"/>
 
         <module name="JavadocType"/>
-        <module name="JavadocVariable"/>
         <module name="JavadocStyle"/>
         <module name="MissingJavadocMethod"/>
 
