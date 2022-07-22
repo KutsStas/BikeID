@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,11 +29,12 @@ public class User {
     private String phoneNumber;
     private String email;
     private String password;
+    private String confirmPassword;
 
     @OneToMany(mappedBy = "user")
-    private List<Bike> bikes;
+    private List<Bike> bikes = new ArrayList<>();
     @OneToMany(mappedBy = "user")
-    private List<Workshop> workshops;
+    private List<Workshop> workshops = new ArrayList<>();
 
 
     @Enumerated(EnumType.STRING)
