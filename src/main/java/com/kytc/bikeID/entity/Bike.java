@@ -1,9 +1,12 @@
 package com.kytc.bikeID.entity;
 
+import com.kytc.bikeID.entity.enums.LegalStatus;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +37,9 @@ public class Bike {
     private Integer wheelSize;
     private String frameNumber;
     private Integer warranty;
-    private Boolean legalStatus;
+
+    @Enumerated(EnumType.STRING)
+    private LegalStatus role;
     @ManyToOne()
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
