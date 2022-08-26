@@ -7,6 +7,7 @@ import com.kytc.bikeID.mapper.UserMapper;
 import com.kytc.bikeID.repository.UserRepository;
 import com.kytc.bikeID.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,14 +19,26 @@ import static java.util.Objects.isNull;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+
     private final UserRepository userRepository;
+
     private final UserMapper userMapper;
 
     @Override
     public Integer addUser(UserDto dto) {
-       User user = userMapper.toUser(dto);
+        validateEmail(dto.getEmail());
+        User user = userMapper.toUser(dto);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
         userRepository.save(user);
         return user.getId();
+
+    }
+
+    private void validateEmail(String email) {
+        if (userRepository.countByEmail(email) > 0) {
+            throw new ValidationException("User with email " + email + " already exist");
+        }
 
     }
 
@@ -68,6 +81,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteById(Integer id) {
+
         userRepository.deleteById(id);
     }
 
