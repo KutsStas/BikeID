@@ -21,6 +21,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+
     private final UserService userService;
 
     @PostMapping
@@ -39,19 +40,32 @@ public class UserController {
 
     @PutMapping
     public ResponseEntity<UserDto> updateUser(@RequestBody UserDto dto) {
-      UserDto dto1 =  userService.updateUserById(dto);
+
+        UserDto dto1 = userService.updateUserById(dto);
         return new ResponseEntity<>(dto1, HttpStatus.OK);
     }
+
     @GetMapping("/all")
     public ResponseEntity<List<UserDto>> getAllUsers() {
-       List<UserDto> userDtoList = userService.allUsersList();
-       return new ResponseEntity<>(userDtoList, HttpStatus.OK);
+
+        List<UserDto> userDtoList = userService.allUsersList();
+        return new ResponseEntity<>(userDtoList, HttpStatus.OK);
     }
+
     @DeleteMapping
     public ResponseEntity<Boolean> deleteUser(@RequestParam Integer id) {
+
         userService.deleteById(id);
         return new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK);
     }
+
+    @GetMapping("/check")
+    public ResponseEntity<Boolean> checkExpirationCode(@RequestParam String code, String email) {
+
+        return new ResponseEntity<>(userService.checkExpirationCode(email, code), HttpStatus.OK);
+    }
+
+    //todo add endpoint to enable user
 
 
 }

@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -28,6 +31,7 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer id;
 
     private String username;
@@ -42,6 +46,11 @@ public class User implements UserDetails {
 
     private String password;
 
+    @Column
+    @NotNull
+    private boolean enable = false;
+
+
     @OneToMany(mappedBy = "user")
     private List<Bike> bikes = new ArrayList<>();
 
@@ -50,6 +59,9 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private RoleEnum role;
+
+    private LocalDate expirationDate = LocalDate.now();
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -60,7 +72,7 @@ public class User implements UserDetails {
     @Override
     public boolean isAccountNonExpired() {
 
-        return true; //todo add
+        return expirationDate.isBefore(expirationDate.plusMonths(1L));
     }
 
     @Override
@@ -78,7 +90,7 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
 
-        return true; //todo add
+        return enable;
     }
 
 }
