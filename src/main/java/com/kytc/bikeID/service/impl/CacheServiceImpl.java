@@ -10,6 +10,7 @@ import redis.clients.jedis.JedisPool;
 @RequiredArgsConstructor
 @Service
 @Log4j2
+@SuppressWarnings("PMD")
 public class CacheServiceImpl implements CacheService {
 
     private final JedisPool jedisPool = new JedisPool("172.22.13.153", 6379);
