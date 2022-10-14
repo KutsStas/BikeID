@@ -1,10 +1,12 @@
 package com.kytc.bikeID.dto;
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
 @Data
 public class WorkshopDto {
+    @Id
     private Integer id;
     private Integer userId;
     private String workshopName;
