@@ -30,11 +30,11 @@ public class WorkshopServiceImpl implements WorkshopService {
 
     @Override
     public Integer addWorkshop(WorkshopDto dto) {
-
-        User user = userRepository.findById(dto.getUserId())
-                .orElseThrow(() -> new NoSuchElementException("Can't find User by ID " + dto.getUserId()));
+//todo check userId not null
+        User user = userRepository.findById(dto.getManagerId())
+                .orElseThrow(() -> new NoSuchElementException("Can't find User by ID " + dto.getManagerId()));
         Workshop workshop = workshopMapper.toWorkshop(dto);
-        workshop.setUser(user);
+        workshop.setManager(user);
         workshopRepository.save(workshop);
         return workshop.getId();
     }
@@ -52,14 +52,14 @@ public class WorkshopServiceImpl implements WorkshopService {
     public WorkshopDto updateWorkshopInfo(WorkshopDto dto) {
 
         if (isNull(dto.getId())) {
-            throw new ValidationException("id can't be null");
+            throw new ValidationException("Workshop id can't be null");
         }
         workshopRepository.findById(dto.getId())
                 .orElseThrow(() -> new NoSuchElementException("Can't find Workshop by id: " + dto.getId()));
-        User user = userRepository.findById(dto.getUserId())
-                .orElseThrow(() -> new NoSuchElementException("Can't find User by ID " + dto.getUserId()));
+        User user = userRepository.findById(dto.getManagerId())
+                .orElseThrow(() -> new NoSuchElementException("Can't find User by ID " + dto.getManagerId()));
         Workshop workshop = workshopMapper.toWorkshop(dto);
-        workshop.setUser(user);
+        workshop.setManager(user);
         workshopRepository.save(workshop);
         return dto;
     }
@@ -70,6 +70,7 @@ public class WorkshopServiceImpl implements WorkshopService {
         User user = (User) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         List<Workshop> workshops = workshopRepository.findAllByUser(user);
+        //todo remove user/should be list of all shops
         return workshops.stream()
                 .map(this::mapToDto)
                 .collect(Collectors.toList());
@@ -83,7 +84,7 @@ public class WorkshopServiceImpl implements WorkshopService {
     }
 
     private WorkshopDto mapToDto(Workshop workshop) {
-
+//todo why method?
         return workshopMapper.toDto(workshop);
     }
 

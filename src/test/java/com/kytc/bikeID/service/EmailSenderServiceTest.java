@@ -1,6 +1,6 @@
 //package com.kytc.bikeID.service;
 //
-//import com.kytc.bikeID.entity.Email;
+//import com.kytc.bikeID.dto.Email;
 //import org.junit.jupiter.api.Assertions;
 //import org.junit.jupiter.api.Test;
 //import org.springframework.beans.factory.annotation.Autowired;

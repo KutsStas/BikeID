@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class WorkshopDto {
     @Id
     private Integer id;
-    private Integer userId;
+    private Integer managerId;
     private String workshopName;
     private String address;
     private String website;

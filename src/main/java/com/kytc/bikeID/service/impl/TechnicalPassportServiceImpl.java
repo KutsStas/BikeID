@@ -31,8 +31,11 @@ public class TechnicalPassportServiceImpl implements TechnicalPassportService {
     @Override
     public Integer addTechnicalPassport(TechnicalPassportDto dto) {
 
-        Bike bike = bikeRepository.findById(dto.getPassportId())
-                .orElseThrow(() -> new NoSuchElementException("Can't find bike by ID " + dto.getPassportId()));
+        if (isNull(dto.getId())) {
+            throw new ValidationException("Can't add technical passport without id");
+        }
+        Bike bike = bikeRepository.findById(dto.getBikeId())
+                .orElseThrow(() -> new NoSuchElementException("Can't find bike by ID " + dto.getBikeId()));
         TechnicalPassport technicalPassport = technicalPassportMapper.toTechnicalPassport(dto);
         technicalPassport.setBike(bike);
         technicalPassportRepository.save(technicalPassport);
@@ -54,24 +57,20 @@ public class TechnicalPassportServiceImpl implements TechnicalPassportService {
     public TechnicalPassportDto updateTechnicalPassportInfo(TechnicalPassportDto dto) {
 
         if (isNull(dto.getId())) {
-            throw new ValidationException("id can't be null");
+            throw new ValidationException("Can't update technical passport without id");
         }
         technicalPassportRepository.findById(dto.getId())
                 .orElseThrow(() -> new NoSuchElementException("Can't find Technical Passport by id: " + dto.getId()));
-        Bike bike = bikeRepository.findById(dto.getPassportId())
-                .orElseThrow(() -> new NoSuchElementException("Can't find bike by ID " + dto.getPassportId()));
         TechnicalPassport technicalPassport = technicalPassportMapper.toTechnicalPassport(dto);
-        technicalPassport.setBike(bike);
         technicalPassportRepository.save(technicalPassport);
         return dto;
     }
 
     @Override
-    public List<TechnicalPassportDto> allBikesTechnicalPassport(Integer passportId) {
-
-        List<TechnicalPassport> technicalPassports = technicalPassportRepository.findAllByBikeId(passportId);
+    public List<TechnicalPassportDto> allBikesTechnicalPassport(Integer userId) {
+        List<TechnicalPassport> technicalPassports = technicalPassportRepository.findAllByBikeId(userId);
         return technicalPassports.stream()
-                .map(this::mapToDto)
+                .map(technicalPassportMapper::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -81,11 +80,5 @@ public class TechnicalPassportServiceImpl implements TechnicalPassportService {
         technicalPassportRepository.deleteById(id);
 
     }
-
-    private TechnicalPassportDto mapToDto(TechnicalPassport technicalPassport) {
-
-        return technicalPassportMapper.toDto(technicalPassport);
-    }
-
 
 }

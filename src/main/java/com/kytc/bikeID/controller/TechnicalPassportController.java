@@ -19,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/technicalPassport")
+//todo add logs  SLF4J
 public class TechnicalPassportController {
 
     private final TechnicalPassportService technicalPassportService;
@@ -46,10 +47,10 @@ public class TechnicalPassportController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<TechnicalPassportDto>> getAllBikeTechnicalPassport(@RequestParam Integer passportId) {
+    public ResponseEntity<List<TechnicalPassportDto>> getAllBikeTechnicalPassport(@RequestParam Integer bikeId) {
 
         List<TechnicalPassportDto> technicalPassportDtoList = technicalPassportService
-                .allBikesTechnicalPassport(passportId);
+                .allBikesTechnicalPassport(bikeId);
         return new ResponseEntity<>(technicalPassportDtoList, HttpStatus.OK);
     }
 

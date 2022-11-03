@@ -10,7 +10,7 @@ public class TechnicalPassportDto {
 @Id
     private Integer id;
 
-    private Integer passportId;
+    private Integer bikeId;
 
     private LocalDate visitDate;
 

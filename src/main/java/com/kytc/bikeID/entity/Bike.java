@@ -11,8 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.List;
 
@@ -22,7 +24,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Table(name = "passports")
+@Table(name = "bikes")
 public class Bike {
 
 
@@ -48,18 +50,20 @@ public class Bike {
 
 
     @Enumerated(EnumType.STRING)
-    private LegalStatus role;
+    private LegalStatus legalStatus;
 
     @ManyToOne()
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "bike")
-    private List<TechnicalPassport> technicalPassports;
+    @OneToOne
+    private TechnicalPassport technicalPassport;
 
-    @ManyToOne()
-    @JoinColumn(name = "workshop_id", nullable = false)
-    private Workshop workshop;
+    @ManyToMany
+    @JoinTable(name = "bikes_workshop", joinColumns =
+    @JoinColumn(name = "bike_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "workshop_id", referencedColumnName = "id"))
+    private  List<Workshop> workshops;
 
 }
 

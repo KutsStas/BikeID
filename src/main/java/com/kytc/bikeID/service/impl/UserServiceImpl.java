@@ -27,14 +27,14 @@ public class UserServiceImpl implements UserService {
 
     private final EmailSenderService emailSenderService;
 
-    private final SpringTemplateEngine templateEngine;
+    private final SpringTemplateEngine templateEngine; //you do not use it? remove?
 
     private final CacheService cacheService;
 
 
     private final UserRepository userRepository;
 
-    private static final String AUTHORIZATION_KEY_PREFIX = "redi2read:strings:";
+    private static final String AUTHORIZATION_KEY_PREFIX = "redi2read:strings:"; //you do not use it? remove?
 
     private static final String AUTH_KEY = "AUTH_KEY_";
 
@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private UserDto mapToDto(User user) {
-
+//todo why in method?
         return userMapper.toDto(user);
     }
 
@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
     public UserDto updateUserById(UserDto dto) {
 
         if (isNull(dto.getId())) {
-            throw new ValidationException("id can't be null");
+            throw new ValidationException("User id can't be null");
         }
         userRepository.findById(dto.getId())
                 .orElseThrow(() -> new NoSuchElementException("Can't find user by id: " + dto.getId()));
@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService {
     public void changeExpirationDate(User user, LocalDate newExpirationDate) {
 
         LocalDate expirationDate = LocalDate.now();
-        user.setExpirationDate(expirationDate);
+        user.setExpirationDate(expirationDate); //should it be newExpirationDate?
         userRepository.save(user);
 
     }

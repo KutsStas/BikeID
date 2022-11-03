@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.List;
@@ -25,28 +24,39 @@ import java.util.List;
 @Entity
 @Table(name = "workshops")
 public class Workshop {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String workshopName;
+
     private String address;
+
     private String website;
+
     private Integer workshopPhoneNumber;
+
     private LocalDate salesDate;
+
     private Integer workshopRating;
+
     private String workshopReviews;
 
     @ManyToOne()
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private User manager;
 
     @ManyToMany
-    @JoinTable(name = "techpassport_workshop",
-            joinColumns = @JoinColumn(name = "workshop_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "tehcpassport_id", referencedColumnName = "id"))
+    @JoinTable(name = "technical_passport_workshop", joinColumns =
+    @JoinColumn(name = "workshop_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "technical_passport_id", referencedColumnName = "id"))
     private List<TechnicalPassport> technicalPassports;
 
-    @OneToMany(mappedBy = "workshop")
+    @ManyToMany
+    @JoinTable(name = "bikes_workshop", joinColumns =
+    @JoinColumn(name = "workshop_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "bike_id", referencedColumnName = "id"))
     private List<Bike> bikes;
 
 }

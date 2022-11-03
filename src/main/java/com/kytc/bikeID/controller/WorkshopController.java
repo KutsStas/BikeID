@@ -19,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/workshop")
+//todo add logs  SLF4J
 public class WorkshopController {
 
     private final WorkshopService workshopService;

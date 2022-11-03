@@ -53,7 +53,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<Bike> bikes = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "manager")
     private List<Workshop> workshops = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)

@@ -18,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/users")
+//todo add logs  SLF4J
 public class UserController {
 
     private final UserService userService;

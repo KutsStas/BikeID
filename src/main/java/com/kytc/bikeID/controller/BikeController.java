@@ -19,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/bike")
+//todo add logs  SLF4J
 public class BikeController {
 
     private final BikeService bikeService;

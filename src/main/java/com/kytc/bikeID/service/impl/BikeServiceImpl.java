@@ -42,7 +42,10 @@ public class BikeServiceImpl implements BikeService {
                 .orElseThrow(() -> new NoSuchElementException("Can't find User by ID " + dto.getUserId()));
         Bike bike = bikeMapper.toEntity(dto);
         bike.setUser(user);
-        bike.setWorkshop(workshop);
+        List<Workshop> workshops = bike.getWorkshops();
+        if (!workshops.contains(workshop)) {
+            workshops.add(workshop);
+        }
         bikeRepository.save(bike);
         return bike.getId();
     }
@@ -70,7 +73,10 @@ public class BikeServiceImpl implements BikeService {
                 .orElseThrow(() -> new NoSuchElementException("Can't find User by ID " + dto.getUserId()));
         Bike bike = bikeMapper.toEntity(dto);
         bike.setUser(user);
-        bike.setWorkshop(workshop);
+        List<Workshop> workshops = bike.getWorkshops();
+        if (!workshops.contains(workshop)) {
+            workshops.add(workshop);
+        }
         bikeRepository.save(bike);
         return dto;
     }

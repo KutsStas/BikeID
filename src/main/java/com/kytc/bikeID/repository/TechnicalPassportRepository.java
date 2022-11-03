@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface TechnicalPassportRepository extends JpaRepository<TechnicalPassport, Integer> {
 
-    @Query("select t from TechnicalPassport t where t.bike.id =:passportId")
-    List<TechnicalPassport> findAllByBikeId(Integer passportId);
+    @Query("select t from TechnicalPassport t where t.bike.id =:bikeId")
+    List<TechnicalPassport> findAllByBikeId(Integer bikeId);
 
 }

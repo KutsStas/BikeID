@@ -1,11 +1,11 @@
-package com.kytc.bikeID.entity;
+package com.kytc.bikeID.dto;
 
 import lombok.Data;
 
 import java.util.Map;
 
 @Data
-public class Email {
+public class EmailDto {
     private Map<String, Object> Properties;
     private String from;
     private String to;

@@ -1,6 +1,7 @@
 package com.kytc.bikeID.service;
 
-import com.kytc.bikeID.entity.Email;
+import com.kytc.bikeID.dto.EmailDto;
+import com.kytc.bikeID.exeption.AuthenticationCodeNotSendException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,11 +26,11 @@ public class EmailSenderService {
     private final JavaMailSender emailSender;
 
     @Value("${spring.mail.username}")
-    private String SendersMail;
+    private String sendersMail;
 
     private final SpringTemplateEngine templateEngine;
 
-    public void sendHtmlMessage(Email email) throws MessagingException {
+    public void sendHtmlMessage(EmailDto email) throws MessagingException {
 
         MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
@@ -48,9 +49,9 @@ public class EmailSenderService {
 
     public void sendAuthenticationCode(String userEmail, String userName, String key) {
 
-        Email email = new Email();
+        EmailDto email = new EmailDto();
         email.setTo(userEmail);
-        email.setFrom(SendersMail);
+        email.setFrom(sendersMail);
         String title = "Welcome Email with Key";
         email.setSubject(title);
         email.setTemplate("welcome-email.html");
@@ -62,7 +63,7 @@ public class EmailSenderService {
         try {
             sendHtmlMessage(email);
         } catch (MessagingException e) {
-            throw new RuntimeException(e); //todo your ex
+            throw new AuthenticationCodeNotSendException(e);
         }
 
     }
