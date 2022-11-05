@@ -10,13 +10,18 @@ public interface BikeService {
 
     BikeDto getBikeById(Integer id);
 
+    String checkBikeLegalStatus(Integer id);
+
+
     BikeDto updateBikeById(BikeDto dto);
 
+    List<BikeDto> listOfStolenBikes();
+
+    BikeDto updateBikeLegalStatus(Integer id);
 
     List<BikeDto> allUsersBike();
 
     void deleteBikeById(Integer id);
-
 
 
 }

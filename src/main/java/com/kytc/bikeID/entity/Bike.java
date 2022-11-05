@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class Bike {
 
     private Integer warranty;
 
-
+    @NotNull
     @Enumerated(EnumType.STRING)
     private LegalStatus legalStatus;
 
@@ -64,7 +65,7 @@ public class Bike {
     @JoinTable(name = "bikes_workshop", joinColumns =
     @JoinColumn(name = "bike_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "workshop_id", referencedColumnName = "id"))
-    private  List<Workshop> workshops = new ArrayList<>();
+    private List<Workshop> workshops = new ArrayList<>();
 
 }
 

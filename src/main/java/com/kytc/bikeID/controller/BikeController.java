@@ -27,6 +27,7 @@ public class BikeController {
 
     @PostMapping
     public ResponseEntity<Integer> addBike(@Valid BikeDto dto) {
+
         log.info("Add bike request.Dto:{} ", dto);
         Integer newBike = bikeService.addBike(dto);
         log.info("Bike with id:{} added successfully.", newBike);
@@ -36,6 +37,7 @@ public class BikeController {
 
     @GetMapping
     public ResponseEntity<BikeDto> getBike(@RequestParam Integer id) {
+
         log.info("Get bike by id:{} request", id);
         BikeDto dto = bikeService.getBikeById(id);
         log.info("Get bike by id:{} successfully", id);
@@ -44,22 +46,53 @@ public class BikeController {
 
     @PutMapping
     public ResponseEntity<BikeDto> updateBikeInfo(@Valid BikeDto dto) {
+
         log.info("Update bike with id:{}  request ", dto.getId());
         BikeDto response = bikeService.updateBikeById(dto);
-        log.info("Bike with id:{} update successfully",  response.getId());
+        log.info("Bike with id:{} update successfully", response.getId());
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PutMapping("/legal")
+    public ResponseEntity<BikeDto> updateBikeLegalStatus(@Valid Integer id) {
+
+        log.info("Update legal status bike with id:{}  request ", id);
+        BikeDto response = bikeService.updateBikeLegalStatus(id);
+        log.info("Bike with id:{} update legal status successfully", id);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<BikeDto>> getAllUsersBike() {
+
         log.info("Getting all users bikes request");
         List<BikeDto> bikeDtoList = bikeService.allUsersBike();
         log.info("Successfully getting all users bike");
         return new ResponseEntity<>(bikeDtoList, HttpStatus.OK);
     }
 
+    @GetMapping("/check_all")
+    public ResponseEntity<List<BikeDto>> getAllOfStolenBikes() {
+
+        log.info("Getting all users bikes request");
+        List<BikeDto> bikeDtoList = bikeService.listOfStolenBikes();
+        log.info("Successfully getting all users bike");
+        return new ResponseEntity<>(bikeDtoList, HttpStatus.OK);
+    }
+
+    @GetMapping("/check")
+    public ResponseEntity<String> checkBikeLegalStatus(@RequestParam Integer id) {
+
+        log.info("Check bike legal status by id:{} request", id);
+        String result = bikeService.checkBikeLegalStatus(id);
+        log.info("Check bike legal status by id:{} successfully", id);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+
     @DeleteMapping
     public ResponseEntity<Boolean> deleteBike(@RequestParam Integer id) {
+
         log.info("Delete bike by id:{} request", id);
         bikeService.deleteBikeById(id);
         log.info("Delete bike by id:{} Successfully", id);

@@ -4,6 +4,7 @@ import com.kytc.bikeID.dto.BikeDto;
 import com.kytc.bikeID.entity.Bike;
 import com.kytc.bikeID.entity.User;
 import com.kytc.bikeID.entity.Workshop;
+import com.kytc.bikeID.entity.enums.LegalStatus;
 import com.kytc.bikeID.exeption.ValidationException;
 import com.kytc.bikeID.mapper.BikeMapper;
 import com.kytc.bikeID.repository.BikeRepository;
@@ -46,6 +47,7 @@ public class BikeServiceImpl implements BikeService {
         if (!workshops.contains(workshop)) {
             workshops.add(workshop);
         }
+        bike.setLegalStatus(LegalStatus.valueOf("LEGAL"));
         bikeRepository.save(bike);
         return bike.getId();
     }
@@ -57,6 +59,17 @@ public class BikeServiceImpl implements BikeService {
                 .orElseThrow(() -> new NoSuchElementException("Can't find bike by id: " + id));
 
         return bikeMapper.toDto(bike);
+    }
+
+    @Override
+    public String checkBikeLegalStatus(Integer id) {
+
+        Bike bike = bikeRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Can't find bike by id: " + id));
+        if (isNull(bike.getLegalStatus())) {
+            throw new ValidationException("Can't find legal status bike with id: " + id);
+        }
+        return bike.getLegalStatus().toString();
     }
 
     @Override
@@ -80,11 +93,37 @@ public class BikeServiceImpl implements BikeService {
         return dto;
     }
 
+    @Override
+    public List<BikeDto> listOfStolenBikes() {
+
+        List<Bike> bikes = bikeRepository.findAllByRole();
+        return bikes.stream()
+                .map(bikeMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public BikeDto updateBikeLegalStatus(Integer id) {
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        Bike bike = bikeRepository.findByUser(user);
+        if (!bike.getId().equals(id)) {
+            throw new ValidationException("Bike id for this user is wrong" + id);
+        }
+        if (bike.getLegalStatus().equals(LegalStatus.LEGAL)) {
+            bike.setLegalStatus(LegalStatus.ILLEGAL);
+        } else {
+            bike.setLegalStatus(LegalStatus.LEGAL);
+        }
+        bikeRepository.save(bike);
+        return bikeMapper.toDto(bike);
+    }
+
     private Workshop getWorkshop(BikeDto dto) {
 
-        Workshop workshop = workshopRepository.findById(dto.getWorkshopId())
+        return workshopRepository.findById(dto.getWorkshopId())
                 .orElseThrow(() -> new NoSuchElementException("Can't find workshop by Id" + dto.getWorkshopId()));
-        return workshop;
     }
 
     @Override
@@ -94,7 +133,7 @@ public class BikeServiceImpl implements BikeService {
                 .getPrincipal();
         List<Bike> bikes = bikeRepository.findAllByUser(user);
         return bikes.stream()
-                .map(this::mapToDto)
+                .map(bikeMapper::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -105,9 +144,5 @@ public class BikeServiceImpl implements BikeService {
 
     }
 
-    private BikeDto mapToDto(Bike bike) {
-
-        return bikeMapper.toDto(bike);
-    }
 
 }
