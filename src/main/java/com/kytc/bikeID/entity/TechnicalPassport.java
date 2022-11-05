@@ -11,6 +11,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -51,7 +52,7 @@ public class TechnicalPassport {
 
 
     @ManyToMany(mappedBy = "technicalPassports")
-    private List<Workshop> workshops;
+    private List<Workshop> workshops = new ArrayList<>();
 
     @OneToOne
     private Bike bike;

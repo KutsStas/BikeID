@@ -1,6 +1,7 @@
 package com.kytc.bikeID.repository;
 
 import com.kytc.bikeID.entity.User;
+import com.kytc.bikeID.entity.enums.RoleEnum;
 import io.lettuce.core.dynamic.annotation.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -17,7 +18,11 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Modifying
     @Transactional
-    @Query(value = "Update users  set enable=true where email=:email", nativeQuery = true)
+    @Query(value = "Update users  set enable=true, role='USER' where email=:email", nativeQuery = true)
     void setEnable(@Param("email")String email);
+
+    @Query("select u.role from User u where u.id=:id")
+    Optional<RoleEnum> findRoleById(Integer id);
+
 
 }

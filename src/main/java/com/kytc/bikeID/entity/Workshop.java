@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -57,6 +58,6 @@ public class Workshop {
     @JoinTable(name = "bikes_workshop", joinColumns =
     @JoinColumn(name = "workshop_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "bike_id", referencedColumnName = "id"))
-    private List<Bike> bikes;
+    private List<Bike> bikes = new ArrayList<>();
 
 }

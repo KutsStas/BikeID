@@ -36,8 +36,8 @@ public class BikeServiceImpl implements BikeService {
     @Override
     public Integer addBike(BikeDto dto) {
 
-        Workshop workshop = workshopRepository.findById(dto.getWorkshopId())
-                .orElseThrow(() -> new NoSuchElementException("Can't find workshop by Id" + dto.getWorkshopId()));
+        dto.setId(null);
+        Workshop workshop = getWorkshop(dto);
         User user = userRepository.findById(dto.getUserId())
                 .orElseThrow(() -> new NoSuchElementException("Can't find User by ID " + dto.getUserId()));
         Bike bike = bikeMapper.toEntity(dto);
@@ -67,8 +67,7 @@ public class BikeServiceImpl implements BikeService {
         }
         bikeRepository.findById(dto.getId())
                 .orElseThrow(() -> new NoSuchElementException("Can't find bike by id: " + dto.getId()));
-        Workshop workshop = workshopRepository.findById(dto.getWorkshopId())
-                .orElseThrow(() -> new NoSuchElementException("Can't find workshop by Id" + dto.getWorkshopId()));
+        Workshop workshop = getWorkshop(dto);
         User user = userRepository.findById(dto.getUserId())
                 .orElseThrow(() -> new NoSuchElementException("Can't find User by ID " + dto.getUserId()));
         Bike bike = bikeMapper.toEntity(dto);
@@ -79,6 +78,13 @@ public class BikeServiceImpl implements BikeService {
         }
         bikeRepository.save(bike);
         return dto;
+    }
+
+    private Workshop getWorkshop(BikeDto dto) {
+
+        Workshop workshop = workshopRepository.findById(dto.getWorkshopId())
+                .orElseThrow(() -> new NoSuchElementException("Can't find workshop by Id" + dto.getWorkshopId()));
+        return workshop;
     }
 
     @Override

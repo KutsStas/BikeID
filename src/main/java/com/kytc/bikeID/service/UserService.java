@@ -14,6 +14,8 @@ public interface UserService {
 
     UserDto updateUserById(UserDto dto);
 
+    boolean setAdmin(Integer id);
+
     List<UserDto> allUsersList();
 
     void deleteById(Integer id);

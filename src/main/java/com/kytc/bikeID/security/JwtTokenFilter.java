@@ -1,13 +1,8 @@
 package com.kytc.bikeID.security;
 
-import java.io.IOException;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.kytc.bikeID.entity.User;
+import com.kytc.bikeID.entity.enums.RoleEnum;
+import com.kytc.bikeID.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,12 +12,21 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 
 @Component
 public class JwtTokenFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtTokenUtil jwtUtil;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -67,7 +71,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         UserDetails userDetails = getUserDetails(token);
 
         UsernamePasswordAuthenticationToken
-                authentication = new UsernamePasswordAuthenticationToken(userDetails, null, null);
+                authentication = new UsernamePasswordAuthenticationToken(userDetails,
+                null, userDetails.getAuthorities());
 
         authentication.setDetails(
                 new WebAuthenticationDetailsSource().buildDetails(request));
@@ -82,7 +87,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
         userDetails.setId(Integer.parseInt(jwtSubject[0]));
         userDetails.setEmail(jwtSubject[1]);
-
+        RoleEnum role = userRepository.findRoleById(Integer.parseInt(jwtSubject[0]))
+                .orElse(RoleEnum.ANONYMOUS);
+        userDetails.setRole(role);
         return userDetails;
     }
 

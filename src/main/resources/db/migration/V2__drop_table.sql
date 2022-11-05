@@ -1,0 +1,1 @@
+drop table user_granted_authorities_list cascade;

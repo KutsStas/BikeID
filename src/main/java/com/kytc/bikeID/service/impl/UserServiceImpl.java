@@ -2,6 +2,7 @@ package com.kytc.bikeID.service.impl;
 
 import com.kytc.bikeID.dto.UserDto;
 import com.kytc.bikeID.entity.User;
+import com.kytc.bikeID.entity.enums.RoleEnum;
 import com.kytc.bikeID.exeption.ValidationException;
 import com.kytc.bikeID.mapper.UserMapper;
 import com.kytc.bikeID.repository.UserRepository;
@@ -75,10 +76,6 @@ public class UserServiceImpl implements UserService {
         return userMapper.toDto(user);
     }
 
-    private UserDto mapToDto(User user) {
-//todo why in method?
-        return userMapper.toDto(user);
-    }
 
     @Override
     public UserDto updateUserById(UserDto dto) {
@@ -94,12 +91,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean setAdmin(Integer id) {
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Can't find user by id: " + id));
+        if (!user.isEnable()) {
+            throw new ValidationException("User with id" + id + "is not enable");
+        }
+        user.setRole(RoleEnum.valueOf("ADMIN"));
+        userRepository.save(user);
+        return true;
+    }
+
+    @Override
     public List<UserDto> allUsersList() {
 
         List<User> users = userRepository.findAll();
-        return users.stream()
-                .map(this::mapToDto)
-                .collect(Collectors.toList());
+        return users.stream().map(userMapper::toDto).collect(Collectors.toList());
 
     }
 

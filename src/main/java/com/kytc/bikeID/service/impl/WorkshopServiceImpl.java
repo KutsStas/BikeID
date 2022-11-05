@@ -9,7 +9,6 @@ import com.kytc.bikeID.repository.UserRepository;
 import com.kytc.bikeID.repository.WorkshopRepository;
 import com.kytc.bikeID.service.WorkshopService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +29,10 @@ public class WorkshopServiceImpl implements WorkshopService {
 
     @Override
     public Integer addWorkshop(WorkshopDto dto) {
-//todo check userId not null
+
+        if (isNull(dto.getManagerId())) {
+            throw new ValidationException("Manager id can't be null");
+        }
         User user = userRepository.findById(dto.getManagerId())
                 .orElseThrow(() -> new NoSuchElementException("Can't find User by ID " + dto.getManagerId()));
         Workshop workshop = workshopMapper.toWorkshop(dto);
@@ -67,12 +69,9 @@ public class WorkshopServiceImpl implements WorkshopService {
     @Override
     public List<WorkshopDto> allWorkshopList() {
 
-        User user = (User) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
-        List<Workshop> workshops = workshopRepository.findAllByUser(user);
-        //todo remove user/should be list of all shops
+        List<Workshop> workshops = workshopRepository.findAll();
         return workshops.stream()
-                .map(this::mapToDto)
+                .map(workshopMapper::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -83,10 +82,7 @@ public class WorkshopServiceImpl implements WorkshopService {
 
     }
 
-    private WorkshopDto mapToDto(Workshop workshop) {
-//todo why method?
-        return workshopMapper.toDto(workshop);
-    }
-
-
 }
+
+
+
