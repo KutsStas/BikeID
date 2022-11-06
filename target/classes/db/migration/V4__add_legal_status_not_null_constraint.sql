@@ -1,0 +1,1 @@
+alter table bikes alter COLUMN  legal_status SET NOT NULL;
