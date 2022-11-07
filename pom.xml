@@ -238,9 +238,6 @@
                 <configuration>
                     <user>postgres</user>
                     <password>123</password>
-                    <schemas>
-                        <schema>bikeId</schema>
-                    </schemas>
                     <url>jdbc:postgresql://localhost/BikeID</url>
 <!--                    <locations>-->
 <!--                        <location>filesystem:/V1__create_tables.sql</location>-->
