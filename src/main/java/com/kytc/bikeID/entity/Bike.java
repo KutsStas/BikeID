@@ -14,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -58,8 +58,8 @@ public class Bike {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToOne
-    private TechnicalPassport technicalPassport;
+    @OneToMany(mappedBy = "bike")
+    private List<TechnicalPassport> technicalPassports;
 
     @ManyToMany
     @JoinTable(name = "bikes_workshop", joinColumns =

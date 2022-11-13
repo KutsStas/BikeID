@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -42,6 +43,16 @@ public class TechnicalPassportController {
         TechnicalPassportDto dto = technicalPassportService.getTechnicalPassportById(id);
         log.info("Get technical passport by id:{} successfully", id);
         return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<TechnicalPassportDto>> getAllBikesTechnicalPassport(@RequestParam Integer id) {
+
+        log.info("Get all technical passport request");
+        List<TechnicalPassportDto> technicalPassportDtoList = technicalPassportService.allBikesTechnicalPassport(id);
+        log.info("Successfully get all technical passport");
+
+        return new ResponseEntity<>(technicalPassportDtoList, HttpStatus.OK);
     }
 
     @PutMapping

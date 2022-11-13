@@ -2,12 +2,14 @@ package com.kytc.bikeID.mapper;
 
 import com.kytc.bikeID.dto.UserDto;
 import com.kytc.bikeID.entity.User;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-11-07T14:54:34+0200",
+    date = "2022-11-13T20:26:59+0200",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.2 (Oracle Corporation)"
 )
 @Component
@@ -48,5 +50,19 @@ public class UserMapperImpl implements UserMapper {
         user.setEnable( dto.isEnable() );
 
         return user;
+    }
+
+    @Override
+    public List<UserDto> toDtoList(List<User> users) {
+        if ( users == null ) {
+            return null;
+        }
+
+        List<UserDto> list = new ArrayList<UserDto>( users.size() );
+        for ( User user : users ) {
+            list.add( toDto( user ) );
+        }
+
+        return list;
     }
 }

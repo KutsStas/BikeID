@@ -2,12 +2,14 @@ package com.kytc.bikeID.mapper;
 
 import com.kytc.bikeID.dto.BikeDto;
 import com.kytc.bikeID.entity.Bike;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-11-07T14:54:34+0200",
+    date = "2022-11-13T20:26:59+0200",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.2 (Oracle Corporation)"
 )
 @Component
@@ -30,6 +32,7 @@ public class BikeMapperImpl implements BikeMapper {
         bikeDto.setWheelSize( bike.getWheelSize() );
         bikeDto.setFrameNumber( bike.getFrameNumber() );
         bikeDto.setWarranty( bike.getWarranty() );
+        bikeDto.setLegalStatus( bike.getLegalStatus() );
 
         return bikeDto;
     }
@@ -51,7 +54,22 @@ public class BikeMapperImpl implements BikeMapper {
         bike.setWheelSize( dto.getWheelSize() );
         bike.setFrameNumber( dto.getFrameNumber() );
         bike.setWarranty( dto.getWarranty() );
+        bike.setLegalStatus( dto.getLegalStatus() );
 
         return bike;
+    }
+
+    @Override
+    public List<BikeDto> toDtoList(List<Bike> bikes) {
+        if ( bikes == null ) {
+            return null;
+        }
+
+        List<BikeDto> list = new ArrayList<BikeDto>( bikes.size() );
+        for ( Bike bike : bikes ) {
+            list.add( toDto( bike ) );
+        }
+
+        return list;
     }
 }

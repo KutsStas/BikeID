@@ -12,13 +12,10 @@ import com.kytc.bikeID.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 import static java.util.Objects.isNull;
 
@@ -26,20 +23,15 @@ import static java.util.Objects.isNull;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final EmailSenderService emailSenderService;
-
-    private final SpringTemplateEngine templateEngine; //you do not use it? remove?
-
-    private final CacheService cacheService;
-
-
-    private final UserRepository userRepository;
-
-    private static final String AUTHORIZATION_KEY_PREFIX = "redi2read:strings:"; //you do not use it? remove?
-
     private static final String AUTH_KEY = "AUTH_KEY_";
 
     private static final int ONE_OUR = 3600;
+
+    private final EmailSenderService emailSenderService;
+
+    private final CacheService cacheService;
+
+    private final UserRepository userRepository;
 
     private final UserMapper userMapper;
 
@@ -71,7 +63,7 @@ public class UserServiceImpl implements UserService {
     public UserDto getUserById(Integer id) {
 
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Can't find user by id: " + id));
+                .orElseThrow(() -> new java.util.NoSuchElementException("Can't find user by id: " + id));
 
         return userMapper.toDto(user);
     }
@@ -84,7 +76,7 @@ public class UserServiceImpl implements UserService {
             throw new ValidationException("User id can't be null");
         }
         userRepository.findById(dto.getId())
-                .orElseThrow(() -> new NoSuchElementException("Can't find user by id: " + dto.getId()));
+                .orElseThrow(() -> new java.util.NoSuchElementException("Can't find user by id: " + dto.getId()));
         User user = userMapper.toUser(dto);
         userRepository.save(user);
         return dto;
@@ -94,7 +86,7 @@ public class UserServiceImpl implements UserService {
     public boolean setAdmin(Integer id) {
 
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Can't find user by id: " + id));
+                .orElseThrow(() -> new java.util.NoSuchElementException("Can't find user by id: " + id));
         if (!user.isEnable()) {
             throw new ValidationException("User with id" + id + "is not enable");
         }
@@ -107,7 +99,7 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> allUsersList() {
 
         List<User> users = userRepository.findAll();
-        return users.stream().map(userMapper::toDto).collect(Collectors.toList());
+        return userMapper.toDtoList(users);
 
     }
 
@@ -131,7 +123,7 @@ public class UserServiceImpl implements UserService {
 
         String keyFromDb = cacheService.getValueByKey(AUTH_KEY + email);
         if (isNull(keyFromDb)) {
-            throw new NoSuchElementException("Can't find user code by email " + email);
+            throw new ValidationException("Can't find user code by email " + email);
         }
         if (!code.equals(keyFromDb)) {
             throw new ValidationException("This code is wrong!" + code);

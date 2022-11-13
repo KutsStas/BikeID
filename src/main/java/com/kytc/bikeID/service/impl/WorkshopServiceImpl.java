@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.isNull;
@@ -34,7 +33,7 @@ public class WorkshopServiceImpl implements WorkshopService {
             throw new ValidationException("Manager id can't be null");
         }
         User user = userRepository.findById(dto.getManagerId())
-                .orElseThrow(() -> new NoSuchElementException("Can't find User by ID " + dto.getManagerId()));
+                .orElseThrow(() -> new java.util.NoSuchElementException("Can't find User by ID " + dto.getManagerId()));
         Workshop workshop = workshopMapper.toWorkshop(dto);
         workshop.setManager(user);
         workshopRepository.save(workshop);
@@ -45,7 +44,7 @@ public class WorkshopServiceImpl implements WorkshopService {
     public WorkshopDto getWorkshopById(Integer id) {
 
         Workshop workshop = workshopRepository.
-                findById(id).orElseThrow(() -> new NoSuchElementException("Can't find Workshop by id" + id));
+                findById(id).orElseThrow(() -> new java.util.NoSuchElementException("Can't find Workshop by id" + id));
         return workshopMapper.toDto(workshop);
 
     }
@@ -57,9 +56,9 @@ public class WorkshopServiceImpl implements WorkshopService {
             throw new ValidationException("Workshop id can't be null");
         }
         workshopRepository.findById(dto.getId())
-                .orElseThrow(() -> new NoSuchElementException("Can't find Workshop by id: " + dto.getId()));
+                .orElseThrow(() -> new java.util.NoSuchElementException("Can't find Workshop by id: " + dto.getId()));
         User user = userRepository.findById(dto.getManagerId())
-                .orElseThrow(() -> new NoSuchElementException("Can't find User by ID " + dto.getManagerId()));
+                .orElseThrow(() -> new java.util.NoSuchElementException("Can't find User by ID " + dto.getManagerId()));
         Workshop workshop = workshopMapper.toWorkshop(dto);
         workshop.setManager(user);
         workshopRepository.save(workshop);

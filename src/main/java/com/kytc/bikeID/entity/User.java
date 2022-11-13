@@ -1,7 +1,9 @@
 package com.kytc.bikeID.entity;
 
 import com.kytc.bikeID.entity.enums.RoleEnum;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,9 +25,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
+@Entity
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(name = "ui_user_email", columnNames = {"email"})})
 public class User implements UserDetails {

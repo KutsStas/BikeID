@@ -16,7 +16,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.isNull;
@@ -40,7 +39,7 @@ public class BikeServiceImpl implements BikeService {
         dto.setId(null);
         Workshop workshop = getWorkshop(dto);
         User user = userRepository.findById(dto.getUserId())
-                .orElseThrow(() -> new NoSuchElementException("Can't find User by ID " + dto.getUserId()));
+                .orElseThrow(() -> new java.util.NoSuchElementException("Can't find User by ID " + dto.getUserId()));
         Bike bike = bikeMapper.toEntity(dto);
         bike.setUser(user);
         List<Workshop> workshops = bike.getWorkshops();
@@ -56,7 +55,7 @@ public class BikeServiceImpl implements BikeService {
     public BikeDto getBikeById(Integer id) {
 
         Bike bike = bikeRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Can't find bike by id: " + id));
+                .orElseThrow(() -> new java.util.NoSuchElementException("Can't find bike by id: " + id));
 
         return bikeMapper.toDto(bike);
     }
@@ -65,24 +64,25 @@ public class BikeServiceImpl implements BikeService {
     public String checkBikeLegalStatus(Integer id) {
 
         Bike bike = bikeRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Can't find bike by id: " + id));
+                .orElseThrow(() -> new java.util.NoSuchElementException("Can't find bike by id: " + id));
         if (isNull(bike.getLegalStatus())) {
             throw new ValidationException("Can't find legal status bike with id: " + id);
+        } else {
+            return bike.getLegalStatus().toString();
         }
-        return bike.getLegalStatus().toString();
     }
 
     @Override
     public BikeDto updateBikeById(BikeDto dto) {
 
         if (isNull(dto.getId())) {
-            throw new ValidationException("id can't be null");
+            throw new ValidationException("Id can't be null");
         }
         bikeRepository.findById(dto.getId())
-                .orElseThrow(() -> new NoSuchElementException("Can't find bike by id: " + dto.getId()));
+                .orElseThrow(() -> new java.util.NoSuchElementException("Can't find bike by id: " + dto.getId()));
         Workshop workshop = getWorkshop(dto);
         User user = userRepository.findById(dto.getUserId())
-                .orElseThrow(() -> new NoSuchElementException("Can't find User by ID " + dto.getUserId()));
+                .orElseThrow(() -> new java.util.NoSuchElementException("Can't find User by ID " + dto.getUserId()));
         Bike bike = bikeMapper.toEntity(dto);
         bike.setUser(user);
         List<Workshop> workshops = bike.getWorkshops();
@@ -107,10 +107,11 @@ public class BikeServiceImpl implements BikeService {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
-        Bike bike = bikeRepository.findByUser(user);
-        if (!bike.getId().equals(id)) {
-            throw new ValidationException("Bike id for this user is wrong" + id);
+        if (!getBikesId(user).contains(id)) {
+            throw new ValidationException("Bike id for this user is wrong " + id);
         }
+        Bike bike = bikeRepository.findById(id)
+                .orElseThrow(() -> new java.util.NoSuchElementException("Can't find bike by id: " + id));
         if (bike.getLegalStatus().equals(LegalStatus.LEGAL)) {
             bike.setLegalStatus(LegalStatus.ILLEGAL);
         } else {
@@ -120,10 +121,15 @@ public class BikeServiceImpl implements BikeService {
         return bikeMapper.toDto(bike);
     }
 
+    private List<Integer> getBikesId(User user) {
+
+        return user.getBikes().stream().map(Bike::getId).collect(Collectors.toList());
+    }
+
     private Workshop getWorkshop(BikeDto dto) {
 
         return workshopRepository.findById(dto.getWorkshopId())
-                .orElseThrow(() -> new NoSuchElementException("Can't find workshop by Id" + dto.getWorkshopId()));
+                .orElseThrow(() -> new ValidationException("Can't find workshop by Id " + dto.getWorkshopId()));
     }
 
     @Override

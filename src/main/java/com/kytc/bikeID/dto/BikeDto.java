@@ -1,5 +1,6 @@
 package com.kytc.bikeID.dto;
 
+import com.kytc.bikeID.entity.enums.LegalStatus;
 import lombok.Data;
 
 @Data
@@ -15,5 +16,6 @@ public class BikeDto {
     private Integer wheelSize;
     private String frameNumber;
     private Integer warranty;
+    private LegalStatus legalStatus;
 
 }
