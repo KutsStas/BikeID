@@ -2,12 +2,14 @@ package com.kytc.bikeID.mapper;
 
 import com.kytc.bikeID.dto.TechnicalPassportDto;
 import com.kytc.bikeID.entity.TechnicalPassport;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-11-13T20:26:59+0200",
+    date = "2022-11-16T00:21:41+0200",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.2 (Oracle Corporation)"
 )
 @Component
@@ -59,5 +61,19 @@ public class TechnicalPassportMapperImpl implements TechnicalPassportMapper {
         technicalPassport.setServiceMenComments( dto.getServiceMenComments() );
 
         return technicalPassport;
+    }
+
+    @Override
+    public List<TechnicalPassportDto> toDosList(List<TechnicalPassport> passportList) {
+        if ( passportList == null ) {
+            return null;
+        }
+
+        List<TechnicalPassportDto> list = new ArrayList<TechnicalPassportDto>( passportList.size() );
+        for ( TechnicalPassport technicalPassport : passportList ) {
+            list.add( toDto( technicalPassport ) );
+        }
+
+        return list;
     }
 }

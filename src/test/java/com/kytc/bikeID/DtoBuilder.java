@@ -1,11 +1,13 @@
 package com.kytc.bikeID;
 
 import com.kytc.bikeID.dto.BikeDto;
+import com.kytc.bikeID.dto.TechnicalPassportDto;
 import com.kytc.bikeID.dto.UserDto;
 import com.kytc.bikeID.dto.WorkshopDto;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +23,7 @@ public class DtoBuilder {
     }
 
     public static BikeDto buildBike() {
+
         BikeDto bikeDto = new BikeDto();
         bikeDto.setId(RandomUtils.nextInt());
         bikeDto.setBikeBrand(RandomStringUtils.random(5));
@@ -29,6 +32,8 @@ public class DtoBuilder {
         bikeDto.setBikeType(RandomStringUtils.random(8));
         return bikeDto;
     }
+
+
     public static WorkshopDto buildWorkshopDto() {
 
         WorkshopDto workshopDto = new WorkshopDto();
@@ -38,6 +43,13 @@ public class DtoBuilder {
 
 
         return workshopDto;
+    }
+    public static TechnicalPassportDto buildTechnicalPassportDto () {
+        TechnicalPassportDto technicalPassportDto = new TechnicalPassportDto();
+        technicalPassportDto.setId(RandomUtils.nextInt());
+        technicalPassportDto.setTechnicalStatus(RandomStringUtils.random(5));
+        technicalPassportDto.setClientName(RandomStringUtils.random(5));
+        return technicalPassportDto;
     }
 
     public static List<UserDto> buildUserListDto() {
@@ -56,6 +68,24 @@ public class DtoBuilder {
             bikes.add(buildBike());
         }
         return bikes;
+    }
+
+    public static List<WorkshopDto> buildWorkshopDtoList() {
+
+        List<WorkshopDto> workshopDtos = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            workshopDtos.add(buildWorkshopDto());
+        }
+        return workshopDtos;
+    }
+
+    public static List<TechnicalPassportDto> buildTechnicalPassportDtoList() {
+
+        List<TechnicalPassportDto> technicalPassportDtos = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            technicalPassportDtos.add(buildTechnicalPassportDto());
+        }
+        return technicalPassportDtos;
     }
 
 }

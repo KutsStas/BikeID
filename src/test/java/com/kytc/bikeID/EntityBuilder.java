@@ -1,11 +1,13 @@
 package com.kytc.bikeID;
 
 import com.kytc.bikeID.entity.Bike;
+import com.kytc.bikeID.entity.TechnicalPassport;
 import com.kytc.bikeID.entity.User;
 import com.kytc.bikeID.entity.Workshop;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +44,15 @@ public class EntityBuilder {
         return workshop;
     }
 
+    public static TechnicalPassport buildTechnicalPassport() {
+
+        TechnicalPassport technicalPassport = new TechnicalPassport();
+        technicalPassport.setId(RandomUtils.nextInt());
+        technicalPassport.setTechnicalStatus(RandomStringUtils.random(5));
+        technicalPassport.setClientName(RandomStringUtils.random(5));
+        return technicalPassport;
+    }
+
     public static List<User> buildUserList() {
 
         List<User> users = new ArrayList<>();
@@ -59,7 +70,9 @@ public class EntityBuilder {
         }
         return bikes;
     }
-    public static List<Workshop> buildWorkshopList(){
+
+    public static List<Workshop> buildWorkshopList() {
+
         List<Workshop> workshops = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             workshops.add(buildWorkshop());
@@ -67,5 +80,15 @@ public class EntityBuilder {
         return workshops;
     }
 
+    public static List<TechnicalPassport> buildTechnicalPassportList() {
+
+        List<TechnicalPassport> technicalPassports = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            technicalPassports.add(buildTechnicalPassport());
+        }
+        return technicalPassports;
+    }
 
 }
+
+

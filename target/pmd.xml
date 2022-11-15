@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd" version="6.46.0" timestamp="2022-11-13T20:26:48.102">
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd" version="6.46.0" timestamp="2022-11-16T00:21:33.205">
 <suppressedviolation filename="C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\service\impl\CacheServiceImpl.java" suppressiontype="annotation" msg="Do not hard code the IP address " usermsg=""></suppressedviolation>
 </pmd>
