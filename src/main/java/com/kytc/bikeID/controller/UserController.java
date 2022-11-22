@@ -27,7 +27,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<Integer> addUser(@Valid UserDto dto) {
+    public ResponseEntity<Integer> addUser(@RequestBody @Valid UserDto dto) {
 
         log.info("Add user request.Dto:{} ", dto);
         Integer newUser = userService.addUser(dto);

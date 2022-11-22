@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 import static java.util.Objects.isNull;
@@ -63,7 +64,7 @@ public class UserServiceImpl implements UserService {
     public UserDto getUserById(Integer id) {
 
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new java.util.NoSuchElementException("Can't find user by id: " + id));
+                .orElseThrow(() -> new NoSuchElementException("Can't find user by id: " + id));
 
         return userMapper.toDto(user);
     }
@@ -76,7 +77,7 @@ public class UserServiceImpl implements UserService {
             throw new ValidationException("User id can't be null");
         }
         userRepository.findById(dto.getId())
-                .orElseThrow(() -> new java.util.NoSuchElementException("Can't find user by id: " + dto.getId()));
+                .orElseThrow(() -> new NoSuchElementException("Can't find user by id: " + dto.getId()));
         User user = userMapper.toUser(dto);
         userRepository.save(user);
         return dto;
@@ -86,7 +87,7 @@ public class UserServiceImpl implements UserService {
     public boolean setAdmin(Integer id) {
 
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new java.util.NoSuchElementException("Can't find user by id: " + id));
+                .orElseThrow(() -> new NoSuchElementException("Can't find user by id: " + id));
         if (!user.isEnable()) {
             throw new ValidationException("User with id" + id + "is not enable");
         }

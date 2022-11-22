@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +27,7 @@ public class BikeController {
     private final BikeService bikeService;
 
     @PostMapping
-    public ResponseEntity<Integer> addBike(@Valid BikeDto dto) {
+    public ResponseEntity<Integer> addBike(@RequestBody @Valid BikeDto dto) {
 
         log.info("Add bike request.Dto:{} ", dto);
         Integer newBike = bikeService.addBike(dto);
@@ -45,7 +46,7 @@ public class BikeController {
     }
 
     @PutMapping
-    public ResponseEntity<BikeDto> updateBikeInfo(@Valid BikeDto dto) {
+    public ResponseEntity<BikeDto> updateBikeInfo(@RequestBody @Valid BikeDto dto) {
 
         log.info("Update bike with id:{}  request ", dto.getId());
         BikeDto response = bikeService.updateBikeById(dto);
@@ -54,7 +55,7 @@ public class BikeController {
     }
 
     @PutMapping("/legal")
-    public ResponseEntity<BikeDto> updateBikeLegalStatus(@Valid Integer id) {
+    public ResponseEntity<BikeDto> updateBikeLegalStatus(@RequestBody @Valid Integer id) {
 
         log.info("Update legal status bike with id:{}  request ", id);
         BikeDto response = bikeService.updateBikeLegalStatus(id);

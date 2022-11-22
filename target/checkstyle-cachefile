@@ -1,9 +1,9 @@
-#Wed Nov 16 17:22:40 EET 2022
-C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\dto\\UserDto.java=1665158723721
+#Tue Nov 22 16:14:09 EET 2022
+C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\dto\\UserDto.java=1668781504558
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\BikeIdApplication.java=1661348140515
-C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\controller\\BikeController.java=1667675275846
+C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\controller\\BikeController.java=1669120286445
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\entity\\TechnicalPassport.java=1668363922246
-C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\exeption\\GlobalControllerAdvice.java=1665158723747
+C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\exeption\\GlobalControllerAdvice.java=1668704182324
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\service\\impl\\WorkshopServiceImpl.java=1668363922255
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\exeption\\ValidationException.java=1668177273716
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\repository\\WorkshopRepository.java=1667480298704
@@ -13,7 +13,7 @@ C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\enti
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\mapper\\BikeMapper.java=1668363922227
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\configuration\\ThymeleafTemplateConfig.java=1665158723704
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\dto\\TechnicalPassportDto.java=1665762295982
-C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\controller\\UserController.java=1667582457388
+C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\controller\\UserController.java=1669030490934
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\repository\\UserRepository.java=1667567005127
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\mapper\\UserMapper.java=1667839512196
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\security\\AuthRequest.java=1665158723780
@@ -25,7 +25,7 @@ module-resource*?\:checkstyle-xpath-suppressions.xml=237B3B81384480B8EA315854554
 module-resource*?\:checkstyle-suppressions.xml=7366BDA3C5BB5DE927CA01C5CFC145F21D7015CA
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\repository\\BikeRepository.java=1667673437645
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\controller\\TechnicalPassportController.java=1668363922267
-C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\service\\impl\\UserServiceImpl.java=1668187661901
+C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\service\\impl\\UserServiceImpl.java=1668703347794
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\dto\\EmailDto.java=1667316299597
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\security\\AuthResponse.java=1665158723783
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\exeption\\AuthenticationCodeNotSendException.java=1667476061722
@@ -39,14 +39,14 @@ C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\enti
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\service\\TechnicalPassportService.java=1668000433917
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\security\\AuthApi.java=1665158723778
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\service\\EmailSenderService.java=1667318691354
-C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\resources\\application.properties=1668363993680
+C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\resources\\application.properties=1668701068186
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\dto\\WorkshopDto.java=1667318691291
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\service\\impl\\CacheServiceImpl.java=1667755883057
 configuration*?=71816C77D74A565E9518B1352DCD02E81A0787BA
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\service\\UserService.java=1667567005111
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\entity\\User.java=1668008231219
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\security\\JwtTokenUtil.java=1665158723789
-C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\service\\impl\\BikeServiceImpl.java=1668360049413
+C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\service\\impl\\BikeServiceImpl.java=1669121695810
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\dto\\BikeDto.java=1668356659195
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\entity\\enums\\LegalStatus.java=1667671014673
 C\:\\Users\\stas\\IdeaProjects\\BikeID\\src\\main\\java\\com\\kytc\\bikeID\\controller\\WorkshopController.java=1667492333378

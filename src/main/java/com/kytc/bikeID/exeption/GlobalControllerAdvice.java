@@ -1,32 +1,76 @@
 package com.kytc.bikeID.exeption;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.context.request.WebRequest;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Date;
+import java.util.NoSuchElementException;
 
 
 @ResponseBody
 @ControllerAdvice
 public class GlobalControllerAdvice {
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    /**
+     * Exception handler for validation errors.
+     *
+     * @param ex      incoming exception
+     * @param request WebRequest autowired object
+     * @return ResponseEntity&lt;ErrorDetails&gt;
+     */
+    @ExceptionHandler(ValidationException.class)
+    public final ResponseEntity<ErrorDetails> handleValidationException(
+            ValidationException ex, WebRequest request) {
 
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
+        ErrorDetails errorDetails =
+                new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public final ResponseEntity<ErrorDetails> handleNotFoundExceptions(Exception ex, WebRequest request) {
+
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(),
+                request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
+    @Getter
+    @Setter
+    public static class ErrorDetails {
+
+        private Date timestamp;
+
+        private String message;
+
+        private String details;
+
+        /**
+         * All parameters constructor.
+         *
+         * @param timestamp date
+         * @param message   exception message
+         * @param details   request description details
+         */
+        ErrorDetails(Date timestamp, String message, String details) {
+
+            this.timestamp = timestamp;
+            this.message = message;
+            this.details = details;
+        }
+
+        @JsonCreator
+        public ErrorDetails() {
+
+        }
+
     }
 
 }

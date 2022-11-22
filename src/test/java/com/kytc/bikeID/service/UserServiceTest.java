@@ -25,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -204,9 +205,10 @@ public class UserServiceTest {
 
         User user = EntityBuilder.buildUser();
         when(cacheService.getValueByKey(AUTH_KEY + user.getEmail())).thenReturn("keyFromDb");
-        userService.checkExpirationCode(user.getEmail(), "keyFromDb");
+        boolean result = userService.checkExpirationCode(user.getEmail(), "keyFromDb");
 
         verify(userRepository, times(1)).setEnable(user.getEmail());
+        assertTrue(result);
     }
 
     @Test
@@ -214,9 +216,9 @@ public class UserServiceTest {
 
         User user = EntityBuilder.buildUser();
         ValidationException thrown = assertThrows(ValidationException.class, () -> {
-            userService.checkExpirationCode(user.getEmail(), null);
-            ;
+            boolean result =    userService.checkExpirationCode(user.getEmail(), null);
         });
+        verify(userRepository, never()).setEnable(user.getEmail());
         assertEquals(thrown.getMessage(), "Can't find user code by email " + user.getEmail());
     }
 

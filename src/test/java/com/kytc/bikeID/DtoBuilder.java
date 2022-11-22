@@ -1,5 +1,8 @@
 package com.kytc.bikeID;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.kytc.bikeID.dto.BikeDto;
 import com.kytc.bikeID.dto.TechnicalPassportDto;
 import com.kytc.bikeID.dto.UserDto;
@@ -16,8 +19,10 @@ public class DtoBuilder {
     public static UserDto buildUserDto() {
 
         UserDto userDto = new UserDto();
+
         userDto.setId(RandomUtils.nextInt());
-        userDto.setPassword(RandomStringUtils.random(7));
+        userDto.setName("Name");
+        userDto.setPassword(RandomStringUtils.randomAlphabetic(7));
         userDto.setEmail(RandomStringUtils.random(5) + "@mail.com");
         return userDto;
     }
@@ -86,6 +91,16 @@ public class DtoBuilder {
             technicalPassportDtos.add(buildTechnicalPassportDto());
         }
         return technicalPassportDtos;
+    }
+    public static String asJsonString(final Object obj) {
+
+        try {
+            return new ObjectMapper().registerModule(new JavaTimeModule())
+                    .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+                    .writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

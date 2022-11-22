@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.isNull;
@@ -39,7 +40,7 @@ public class BikeServiceImpl implements BikeService {
         dto.setId(null);
         Workshop workshop = getWorkshop(dto);
         User user = userRepository.findById(dto.getUserId())
-                .orElseThrow(() -> new java.util.NoSuchElementException("Can't find User by ID " + dto.getUserId()));
+                .orElseThrow(() -> new NoSuchElementException("Can't find User by ID " + dto.getUserId()));
         Bike bike = bikeMapper.toEntity(dto);
         bike.setUser(user);
         List<Workshop> workshops = bike.getWorkshops();
@@ -55,7 +56,7 @@ public class BikeServiceImpl implements BikeService {
     public BikeDto getBikeById(Integer id) {
 
         Bike bike = bikeRepository.findById(id)
-                .orElseThrow(() -> new java.util.NoSuchElementException("Can't find bike by id: " + id));
+                .orElseThrow(() -> new NoSuchElementException("Can't find bike by id: " + id));
 
         return bikeMapper.toDto(bike);
     }
@@ -64,7 +65,7 @@ public class BikeServiceImpl implements BikeService {
     public String checkBikeLegalStatus(Integer id) {
 
         Bike bike = bikeRepository.findById(id)
-                .orElseThrow(() -> new java.util.NoSuchElementException("Can't find bike by id: " + id));
+                .orElseThrow(() -> new NoSuchElementException("Can't find bike by id: " + id));
         if (isNull(bike.getLegalStatus())) {
             throw new ValidationException("Can't find legal status bike with id: " + id);
         } else {
@@ -79,10 +80,10 @@ public class BikeServiceImpl implements BikeService {
             throw new ValidationException("Id can't be null");
         }
         bikeRepository.findById(dto.getId())
-                .orElseThrow(() -> new java.util.NoSuchElementException("Can't find bike by id: " + dto.getId()));
+                .orElseThrow(() -> new NoSuchElementException("Can't find bike by id: " + dto.getId()));
         Workshop workshop = getWorkshop(dto);
         User user = userRepository.findById(dto.getUserId())
-                .orElseThrow(() -> new java.util.NoSuchElementException("Can't find User by ID " + dto.getUserId()));
+                .orElseThrow(() -> new NoSuchElementException("Can't find User by ID " + dto.getUserId()));
         Bike bike = bikeMapper.toEntity(dto);
         bike.setUser(user);
         List<Workshop> workshops = bike.getWorkshops();
@@ -111,7 +112,7 @@ public class BikeServiceImpl implements BikeService {
             throw new ValidationException("Bike id for this user is wrong " + id);
         }
         Bike bike = bikeRepository.findById(id)
-                .orElseThrow(() -> new java.util.NoSuchElementException("Can't find bike by id: " + id));
+                .orElseThrow(() -> new NoSuchElementException("Can't find bike by id: " + id));
         if (bike.getLegalStatus().equals(LegalStatus.LEGAL)) {
             bike.setLegalStatus(LegalStatus.ILLEGAL);
         } else {
