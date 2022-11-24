@@ -55,7 +55,7 @@ public class BikeController {
     }
 
     @PutMapping("/legal")
-    public ResponseEntity<BikeDto> updateBikeLegalStatus(@RequestBody @Valid Integer id) {
+    public ResponseEntity<BikeDto> updateBikeLegalStatus(@RequestParam Integer id) {
 
         log.info("Update legal status bike with id:{}  request ", id);
         BikeDto response = bikeService.updateBikeLegalStatus(id);
