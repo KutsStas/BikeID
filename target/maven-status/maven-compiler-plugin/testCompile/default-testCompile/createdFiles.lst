@@ -1,0 +1,9 @@
+com\kytc\bikeID\service\UserServiceTest.class
+com\kytc\bikeID\controller\UserControllerTest.class
+com\kytc\bikeID\service\TechnicalPassportServiceTest.class
+com\kytc\bikeID\service\WorkShopServiceTest.class
+com\kytc\bikeID\service\BikeServiceTest.class
+com\kytc\bikeID\service\EmailSenderServiceTest.class
+com\kytc\bikeID\EntityBuilder.class
+com\kytc\bikeID\controller\BikeControllerTest.class
+com\kytc\bikeID\DtoBuilder.class
