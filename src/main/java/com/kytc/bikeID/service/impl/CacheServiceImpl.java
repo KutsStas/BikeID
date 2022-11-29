@@ -13,7 +13,7 @@ import redis.clients.jedis.JedisPool;
 @SuppressWarnings("PMD")
 public class CacheServiceImpl implements CacheService {
 
-    private final JedisPool jedisPool = new JedisPool("127.0.0.1", 6379);
+    private final JedisPool jedisPool = new JedisPool("3.75.172.192", 6379);
 
     @Override
     public String addValue(String key, String value) {
