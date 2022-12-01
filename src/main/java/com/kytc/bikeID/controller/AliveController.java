@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
  * AliveController.
  */
 @RestController
-@RequestMapping("/alive")
+@RequestMapping("/")
 public class AliveController {
     /**
      * GetMapping.
