@@ -71,8 +71,8 @@ jobs:
       with:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        application_name: Idbike-env
-        environment_name: idbike
+        application_name: idbike
+        environment_name: Idbike-env
         version_label: "docker-app-${{ steps.format-time.outputs.replaced }}"
         region: eu-central-1
         deployment_package: deploy.zip
