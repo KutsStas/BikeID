@@ -1,7 +1,7 @@
 package com.kytc.bikeID.service;
 
 import com.kytc.bikeID.dto.EmailDto;
-import com.kytc.bikeID.exeption.AuthenticationCodeNotSendException;
+import com.kytc.bikeID.exception.AuthenticationCodeNotSendException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

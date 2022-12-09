@@ -3,7 +3,7 @@ package com.kytc.bikeID.service.impl;
 import com.kytc.bikeID.dto.WorkshopDto;
 import com.kytc.bikeID.entity.User;
 import com.kytc.bikeID.entity.Workshop;
-import com.kytc.bikeID.exeption.ValidationException;
+import com.kytc.bikeID.exception.ValidationException;
 import com.kytc.bikeID.mapper.WorkshopMapper;
 import com.kytc.bikeID.repository.UserRepository;
 import com.kytc.bikeID.repository.WorkshopRepository;

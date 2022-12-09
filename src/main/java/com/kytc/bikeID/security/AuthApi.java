@@ -19,6 +19,7 @@ public class AuthApi {
     @Autowired
     private JwtTokenUtil jwtUtil;
 
+
     @PostMapping("/auth/login")
     public ResponseEntity<?> login(@RequestBody @Valid AuthRequest request) {
 

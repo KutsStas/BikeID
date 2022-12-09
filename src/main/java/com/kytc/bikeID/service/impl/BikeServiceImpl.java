@@ -5,7 +5,7 @@ import com.kytc.bikeID.entity.Bike;
 import com.kytc.bikeID.entity.User;
 import com.kytc.bikeID.entity.Workshop;
 import com.kytc.bikeID.entity.enums.LegalStatus;
-import com.kytc.bikeID.exeption.ValidationException;
+import com.kytc.bikeID.exception.ValidationException;
 import com.kytc.bikeID.mapper.BikeMapper;
 import com.kytc.bikeID.repository.BikeRepository;
 import com.kytc.bikeID.repository.UserRepository;
@@ -24,6 +24,7 @@ import static java.util.Objects.isNull;
 @Service
 @RequiredArgsConstructor
 public class BikeServiceImpl implements BikeService {
+
 
     private final BikeMapper bikeMapper;
 

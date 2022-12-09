@@ -59,7 +59,12 @@ public class ApplicationSecurity {
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
-        http.csrf().disable().authorizeRequests()
+        http.csrf().disable()
+                .httpBasic().disable()
+                .authorizeRequests()
+                .antMatchers("/").permitAll().and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/excel").permitAll()
                 .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
                 .antMatchers(HttpMethod.GET, "/docs/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/user").permitAll()

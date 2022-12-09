@@ -1,4 +1,4 @@
-package com.kytc.bikeID.exeption;
+package com.kytc.bikeID.exception;
 
 public class ValidationException extends RuntimeException {
 

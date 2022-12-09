@@ -3,7 +3,7 @@ package com.kytc.bikeID.service.impl;
 import com.kytc.bikeID.dto.TechnicalPassportDto;
 import com.kytc.bikeID.entity.Bike;
 import com.kytc.bikeID.entity.TechnicalPassport;
-import com.kytc.bikeID.exeption.ValidationException;
+import com.kytc.bikeID.exception.ValidationException;
 import com.kytc.bikeID.mapper.TechnicalPassportMapper;
 import com.kytc.bikeID.repository.BikeRepository;
 import com.kytc.bikeID.repository.TechnicalPassportRepository;

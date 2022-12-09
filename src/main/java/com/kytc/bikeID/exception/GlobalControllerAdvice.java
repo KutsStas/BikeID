@@ -1,4 +1,4 @@
-package com.kytc.bikeID.exeption;
+package com.kytc.bikeID.exception;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;

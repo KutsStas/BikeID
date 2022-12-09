@@ -5,7 +5,7 @@ import com.kytc.bikeID.EntityBuilder;
 import com.kytc.bikeID.dto.UserDto;
 import com.kytc.bikeID.entity.User;
 import com.kytc.bikeID.entity.enums.RoleEnum;
-import com.kytc.bikeID.exeption.ValidationException;
+import com.kytc.bikeID.exception.ValidationException;
 import com.kytc.bikeID.mapper.UserMapperImpl;
 import com.kytc.bikeID.repository.UserRepository;
 import com.kytc.bikeID.service.impl.UserServiceImpl;

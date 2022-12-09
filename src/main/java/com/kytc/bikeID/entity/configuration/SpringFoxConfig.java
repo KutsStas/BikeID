@@ -1,4 +1,4 @@
-package com.kytc.bikeID.configuration;
+package com.kytc.bikeID.entity.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,15 +12,18 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @Configuration
 public class SpringFoxConfig {
+
     /**
      * Docket.
      */
     @Bean
     public Docket api() {
+
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.kytc.bikeID"))
                 .paths(PathSelectors.any())
                 .build();
     }
+
 }
