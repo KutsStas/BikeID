@@ -1,8 +1,11 @@
-package com.kytc.bikeID.security;
+package com.kytc.bikeID.controller;
 
 import javax.validation.Valid;
 
 import com.kytc.bikeID.entity.User;
+import com.kytc.bikeID.security.AuthRequest;
+import com.kytc.bikeID.security.AuthResponse;
+import com.kytc.bikeID.security.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.security.authentication.*;
@@ -11,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-public class AuthApi {
+public class AuthController {
 
     @Autowired
     private AuthenticationManager authManager;
@@ -20,7 +23,7 @@ public class AuthApi {
     private JwtTokenUtil jwtUtil;
 
 
-    @PostMapping("/auth/login")
+    @PostMapping("/authenticate")
     public ResponseEntity<?> login(@RequestBody @Valid AuthRequest request) {
 
         try {

@@ -14,6 +14,7 @@ public class BikeIdApplication {
      * javadoc.
      */
     public static void main(String[] args) {
+
         SpringApplication.run(BikeIdApplication.class, args);
     }
 

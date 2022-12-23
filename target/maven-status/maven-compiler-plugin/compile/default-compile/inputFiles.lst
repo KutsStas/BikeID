@@ -1,7 +1,7 @@
+C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\configuration\SwaggerConfiguration.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\dto\WorkshopDto.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\service\TechnicalPassportService.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\service\WorkshopService.java
-C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\security\AuthApi.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\repository\TechnicalPassportRepository.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\security\AuthRequest.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\controller\AliveController.java
@@ -21,13 +21,14 @@ C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\util\BikeExcelEx
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\controller\BikeController.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\security\JwtTokenUtil.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\controller\WorkshopController.java
-C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\entity\configuration\ThymeleafTemplateConfig.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\security\JwtTokenFilter.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\service\BikeService.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\repository\WorkshopRepository.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\mapper\TechnicalPassportMapper.java
+C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\controller\AuthController.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\mapper\UserMapper.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\entity\enums\LegalStatus.java
+C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\configuration\ThymeleafTemplateConfig.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\controller\ExelWriterController.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\dto\BikeDto.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\entity\enums\RoleEnum.java
@@ -35,7 +36,6 @@ C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\service\impl\Tec
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\security\ApplicationSecurity.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\security\AuthResponse.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\entity\Workshop.java
-C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\entity\configuration\SpringFoxConfig.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\mapper\BikeMapper.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\service\impl\BikeServiceImpl.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\service\impl\CacheServiceImpl.java

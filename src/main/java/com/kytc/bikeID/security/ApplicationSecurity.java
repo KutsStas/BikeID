@@ -21,6 +21,13 @@ import javax.servlet.http.HttpServletResponse;
 
 @Configuration
 public class ApplicationSecurity {
+    private static final String[] AUTH_WHITELIST = {
+            "/authenticate",
+            "/swagger-resources/**",
+            "/swagger-ui/**",
+            "/v3/api-docs",
+            "/webjars/**"
+    };
 
     @Autowired
     private UserRepository userRepo;
@@ -56,14 +63,19 @@ public class ApplicationSecurity {
         return authConfig.getAuthenticationManager();
     }
 
+
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
-        http.csrf().disable()
-                .httpBasic().disable()
-                .authorizeRequests()
-                .antMatchers("/").permitAll().and()
-                .authorizeRequests()
+        http.cors()
+                .and()
+                .csrf()
+                .disable()
+                .headers()
+                .frameOptions()
+                .deny()
+                .and()
+                .authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll()
                 .antMatchers(HttpMethod.GET, "/excel").permitAll()
                 .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
                 .antMatchers(HttpMethod.GET, "/docs/**").permitAll()

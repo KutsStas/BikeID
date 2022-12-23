@@ -1,4 +1,4 @@
-package com.kytc.bikeID.entity.configuration;
+package com.kytc.bikeID.configuration;
 
 
 import org.springframework.context.annotation.Bean;
