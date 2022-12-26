@@ -21,6 +21,7 @@ com\kytc\bikeID\exception\AuthenticationCodeNotSendException.class
 com\kytc\bikeID\controller\BikeController.class
 com\kytc\bikeID\dto\UserDto.class
 com\kytc\bikeID\mapper\BikeMapperImpl.class
+com\kytc\bikeID\configuration\SimpleCacheCustomizer.class
 com\kytc\bikeID\service\WorkshopService.class
 com\kytc\bikeID\configuration\SwaggerConfiguration.class
 com\kytc\bikeID\exception\GlobalControllerAdvice$ErrorDetails.class

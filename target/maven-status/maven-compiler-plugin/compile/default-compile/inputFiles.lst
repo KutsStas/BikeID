@@ -36,6 +36,7 @@ C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\service\impl\Tec
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\security\ApplicationSecurity.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\security\AuthResponse.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\entity\Workshop.java
+C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\configuration\SimpleCacheCustomizer.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\mapper\BikeMapper.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\service\impl\BikeServiceImpl.java
 C:\Users\stas\IdeaProjects\BikeID\src\main\java\com\kytc\bikeID\service\impl\CacheServiceImpl.java

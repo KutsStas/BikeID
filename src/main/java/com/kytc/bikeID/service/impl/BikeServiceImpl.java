@@ -12,6 +12,10 @@ import com.kytc.bikeID.repository.UserRepository;
 import com.kytc.bikeID.repository.WorkshopRepository;
 import com.kytc.bikeID.service.BikeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +40,7 @@ public class BikeServiceImpl implements BikeService {
 
 
     @Override
+    @Cacheable(value = "bikes", key = "#dto.id")
     public Integer addBike(BikeDto dto) {
 
         dto.setId(null);
@@ -54,6 +59,7 @@ public class BikeServiceImpl implements BikeService {
     }
 
     @Override
+    @Cacheable(value = "bikes", key = "#id")
     public BikeDto getBikeById(Integer id) {
 
         Bike bike = bikeRepository.findById(id)
@@ -75,6 +81,7 @@ public class BikeServiceImpl implements BikeService {
     }
 
     @Override
+    @CachePut(value = "bikes", key = "#dto.id")
     public BikeDto updateBikeById(BikeDto dto) {
 
         if (isNull(dto.getId())) {
@@ -96,6 +103,7 @@ public class BikeServiceImpl implements BikeService {
     }
 
     @Override
+    @Cacheable("stolen")
     public List<BikeDto> listOfStolenBikes() {
 
         List<Bike> bikes = bikeRepository.findAllByRole();
@@ -105,15 +113,22 @@ public class BikeServiceImpl implements BikeService {
     }
 
     @Override
+    @Caching(
+            put = {
+                    @CachePut(value = "bikes", key = "#id")},
+            evict = {
+                    @CacheEvict(value = "stolen", allEntries = true)})
     public BikeDto updateBikeLegalStatus(Integer id) {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
-        if (!getBikesId(user).contains(id)) {
-            throw new ValidationException("Bike id for this user is wrong " + id);
-        }
+
         Bike bike = bikeRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Can't find bike by id: " + id));
+        if (!bike.getUser().getId().equals(user.getId())) {
+            throw new ValidationException("Bike id for this user is wrong " + id);
+        }
+
         if (bike.getLegalStatus().equals(LegalStatus.LEGAL)) {
             bike.setLegalStatus(LegalStatus.ILLEGAL);
         } else {
@@ -123,10 +138,6 @@ public class BikeServiceImpl implements BikeService {
         return bikeMapper.toDto(bike);
     }
 
-    private List<Integer> getBikesId(User user) {
-
-        return user.getBikes().stream().map(Bike::getId).collect(Collectors.toList());
-    }
 
     private Workshop getWorkshop(BikeDto dto) {
 
@@ -146,6 +157,7 @@ public class BikeServiceImpl implements BikeService {
     }
 
     @Override
+    @CacheEvict(value = "bikes", key = "#id")
     public void deleteBikeById(Integer id) {
 
         bikeRepository.deleteById(id);
