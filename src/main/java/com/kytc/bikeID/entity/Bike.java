@@ -34,6 +34,7 @@ public class Bike {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+
     private String bikeType;
 
     private String bikeBrand;
@@ -68,6 +69,3 @@ public class Bike {
     private List<Workshop> workshops = new ArrayList<>();
 
 }
-
-
-

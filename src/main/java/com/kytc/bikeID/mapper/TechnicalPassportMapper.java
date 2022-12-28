@@ -13,6 +13,6 @@ public interface TechnicalPassportMapper {
 
     TechnicalPassport toTechnicalPassport(TechnicalPassportDto dto);
 
-   List<TechnicalPassportDto> toDosList(List<TechnicalPassport> passportList);
+    List<TechnicalPassportDto> toDosList(List<TechnicalPassport> passportList);
 
 }

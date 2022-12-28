@@ -1,5 +1,6 @@
 package com.kytc.bikeID.dto;
 
+import com.kytc.bikeID.entity.enums.WarrantyWork;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
@@ -14,25 +15,5 @@ public class TechnicalPassportDto {
 
     private LocalDate visitDate;
 
-    private String bikeName;
-
-    private String serviceWork;
-
-    private Boolean warrantyWork;
-
-    private String workShop;
-
-    private String clientName;
-
-    private String servicemenName;
-
-    private String replacementParts;
-
-    private Integer workPrise;
-
-    private String technicalStatus;
-
-    private String serviceMenComments;
-
-
+    private WarrantyWork warrantyWork;
 }

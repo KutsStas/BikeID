@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Configuration
 public class ApplicationSecurity {
+
     private static final String[] AUTH_WHITELIST = {
             "/authenticate",
             "/swagger-resources/**",
@@ -76,11 +77,11 @@ public class ApplicationSecurity {
                 .deny()
                 .and()
                 .authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll()
-                .antMatchers(HttpMethod.GET, "/excel").permitAll()
                 .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
                 .antMatchers(HttpMethod.GET, "/docs/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/user").permitAll()
                 .antMatchers(HttpMethod.GET, "/user/check").permitAll()
+                .antMatchers(HttpMethod.GET, "/excel").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(HttpMethod.POST, "/technicalPassport", "/bike")
                 .hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(HttpMethod.POST, "/workshop").hasAnyAuthority("ADMIN")
@@ -92,6 +93,11 @@ public class ApplicationSecurity {
                 .antMatchers(HttpMethod.DELETE, "/user", "/technicalPassport", "/bike")
                 .hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/workshop").hasAnyAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET, "/report", "/report/by_bike", "/report/by_user")
+                .hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.POST, "/report").hasAnyAuthority("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/report").hasAnyAuthority("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/report").hasAnyAuthority("ADMIN")
                 .anyRequest().authenticated();
         http.exceptionHandling()
                 .authenticationEntryPoint(

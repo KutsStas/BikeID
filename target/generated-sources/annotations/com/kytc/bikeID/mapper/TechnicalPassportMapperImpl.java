@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-26T19:32:23+0200",
+    date = "2022-12-28T17:04:12+0200",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.2 (Oracle Corporation)"
 )
 @Component
@@ -25,16 +25,7 @@ public class TechnicalPassportMapperImpl implements TechnicalPassportMapper {
 
         technicalPassportDto.setId( technicalPassport.getId() );
         technicalPassportDto.setVisitDate( technicalPassport.getVisitDate() );
-        technicalPassportDto.setBikeName( technicalPassport.getBikeName() );
-        technicalPassportDto.setServiceWork( technicalPassport.getServiceWork() );
         technicalPassportDto.setWarrantyWork( technicalPassport.getWarrantyWork() );
-        technicalPassportDto.setWorkShop( technicalPassport.getWorkShop() );
-        technicalPassportDto.setClientName( technicalPassport.getClientName() );
-        technicalPassportDto.setServicemenName( technicalPassport.getServicemenName() );
-        technicalPassportDto.setReplacementParts( technicalPassport.getReplacementParts() );
-        technicalPassportDto.setWorkPrise( technicalPassport.getWorkPrise() );
-        technicalPassportDto.setTechnicalStatus( technicalPassport.getTechnicalStatus() );
-        technicalPassportDto.setServiceMenComments( technicalPassport.getServiceMenComments() );
 
         return technicalPassportDto;
     }
@@ -49,16 +40,7 @@ public class TechnicalPassportMapperImpl implements TechnicalPassportMapper {
 
         technicalPassport.setId( dto.getId() );
         technicalPassport.setVisitDate( dto.getVisitDate() );
-        technicalPassport.setBikeName( dto.getBikeName() );
-        technicalPassport.setServiceWork( dto.getServiceWork() );
         technicalPassport.setWarrantyWork( dto.getWarrantyWork() );
-        technicalPassport.setWorkShop( dto.getWorkShop() );
-        technicalPassport.setClientName( dto.getClientName() );
-        technicalPassport.setServicemenName( dto.getServicemenName() );
-        technicalPassport.setReplacementParts( dto.getReplacementParts() );
-        technicalPassport.setWorkPrise( dto.getWorkPrise() );
-        technicalPassport.setTechnicalStatus( dto.getTechnicalStatus() );
-        technicalPassport.setServiceMenComments( dto.getServiceMenComments() );
 
         return technicalPassport;
     }

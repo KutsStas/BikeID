@@ -1,9 +1,12 @@
 package com.kytc.bikeID.entity;
 
+import com.kytc.bikeID.entity.enums.WarrantyWork;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,27 +32,11 @@ public class TechnicalPassport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+
     private LocalDate visitDate;
 
-    private String bikeName;
-
-    private String serviceWork;
-
-    private Boolean warrantyWork;
-
-    private String workShop;
-
-    private String clientName;
-
-    private String servicemenName;
-
-    private String replacementParts;
-
-    private Integer workPrise;
-
-    private String technicalStatus;
-
-    private String serviceMenComments;
+    @Enumerated(EnumType.STRING)
+    private WarrantyWork warrantyWork;
 
 
     @ManyToMany(mappedBy = "technicalPassports")
@@ -59,5 +46,5 @@ public class TechnicalPassport {
     @JoinColumn(name = "bike_id", nullable = false)
     private Bike bike;
 
-
 }
+
